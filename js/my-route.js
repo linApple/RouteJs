@@ -3,12 +3,27 @@
     var constant = {
         division: "#!",
         routeAttrName: "route-url",
-        controllerAttrName:"route-controller"
+        controllerAttrName: "route-controller",
+        viewAttrName: "route-view"
     };
     var Actions = [];
     var Params = {};
-    var Controllers={};
-    
+    var Controllers = {};
+    var Route = {
+        get: function(key, param) {
+            var key += ".";
+            var index = key.lastIndexOf(".");
+            var str = key.substr(0, index);
+            while (typeof this[str] === "object") {
+                if (typeof this[str][param] !== "undefined")
+                    return this[str][param];
+                index = str.lastIndexOf(".");
+                str = key.substr(0, index);
+            }
+            return false;
+        }
+    };
+
     function initRoute() {
         var hash = window.location.hash;
         if (hash.length == 0)
@@ -43,17 +58,17 @@
         });
     }
 
-    function hashChange(arg){
+    function hashChange(arg) {
 
-        
+
     }
 
 
     function Route() {
-        if (initRoute()!=false) {
+        if (initRoute() != false) {
             routeUrlBind();
             window.onhashchange = hashChange;
-        }else{
+        } else {
             console.log("error");
         }
 
@@ -94,8 +109,18 @@
         RouteGo();
     }
 
-    Route.prototype.addModule=function(name,fc){
-        Controllers[name]=fc;
+    Route.prototype.addModule = function(name, fc) {
+        Controllers[name] = fc;
+    }
+
+    Route.prototype.setRoute = function(obj) {
+        if (typeof obj !== "object") {
+            console.error("参数错误！");
+            return false;
+        }
+        for (var key in obj) {
+            Route[key] = obj[key];
+        }
     }
 
     window.MyRoute = Route;
