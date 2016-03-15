@@ -4,5 +4,5 @@
 .header ul li {float: left;cursor: pointer;padding: 0px 5px}
 
 .content {float: left;width: 100%;background: yellow}
-.left {float: left;width:200px;height: 100%;background: blue}
-.right {width: auto;height: 100%;background: grey}
+.left {float: left;width:200px;height: 100%;background: grey}
+.right {width: auto;height: 100%;background: white}

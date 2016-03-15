@@ -6,17 +6,27 @@ $(function(window, $, MyRoute) {
         route.setRoute({
             "background.navi": {
                 view: "leftMenu",
-                autoLoad:true
+                autoLoad: true
             },
             "background.navi.privilege": {
-                url: "background/privilege/index.html"
+                url: "templete/privilege/left.html"
             },
             "background.navi.department": {
-                url: "background/department/index.html"
+                url: "templete/department/left.html"
             },
             "background.navi.member": {
-                url: "background/member/index.html"
+                url: "templete/member/left.html"
             }
+        });
+
+        route.controller("background.navi.privilege", function() {
+            console.log("privilege");
+        });
+        route.controller("background.navi.department", function() {
+            console.log("department");
+        });
+        route.controller("background.navi.member", function() {
+            console.log("department");
         });
 
     });
